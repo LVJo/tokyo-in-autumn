@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>東京紅葉帳 · TOKYO AUTUMN 5 DAYS</title>
+  <!-- 引入日本昭和感明朝體與圓體 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Zen+Maru+Gothic:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-paper: #f6f1e7;
+      --bg-card: #fffdf9;
+      --ink-dark: #2c221e;
+      --ink-muted: #786b63;
+      --momiji-red: #b3392b;      /* 楓葉深紅 */
+      --momiji-light: #fbeae7;
+      --gingko-gold: #d99b26;     /* 銀杏金黃 */
+      --gingko-light: #fdf5e2;
+      --matcha-green: #4a6b53;    /* 庭園苔綠 */
+      --border-retro: #d8ccb8;
+      --shadow-retro: 3px 3px 0px #2c221e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-paper);
+      background-image: radial-gradient(#d8ccb8 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+      color: var(--ink-dark);
+      font-family: 'Zen Maru Gothic', sans-serif;
+      min-height: 100vh;
+      padding-bottom: 90px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* 手機版型容器 */
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 16px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 飄落楓葉背景裝飾 */
+    .falling-leaves {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .leaf {
+      position: absolute;
+      top: -10%;
+      font-size: 16px;
+      opacity: 0.35;
+      animation: fall linear infinite;
+    }
+    .leaf:nth-child(1) { left: 10%; animation-duration: 14s; animation-delay: 0s; }
+    .leaf:nth-child(2) { left: 30%; animation-duration: 18s; animation-delay: 4s; font-size: 12px; }
+    .leaf:nth-child(3) { left: 65%; animation-duration: 16s; animation-delay: 2s; }
+    .leaf:nth-child(4) { left: 85%; animation-duration: 20s; animation-delay: 6s; font-size: 14px; }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg) translateX(0px); }
+      50% { transform: translateY(50vh) rotate(180deg) translateX(20px); }
+      100% { transform: translateY(110vh) rotate(360deg) translateX(-15px); }
+    }
+
+    /* 頂部 Header */
+    header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--ink-dark);
+    }
+
+    .brand-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--momiji-red);
+      font-weight: 700;
+      display: block;
+    }
+
+    header h1 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--ink-dark);
+      line-height: 1.2;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--ink-muted);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--ink-dark);
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 11px;
+      margin-top: 4px;
+      color: var(--ink-dark);
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--matcha-green);
+      display: inline-block;
+    }
+
+    /* 旅行封面 Section */
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-card);
+      border: 2px solid var(--ink-dark);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-retro);
+      margin-bottom: 16px;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      height: 190px;
+      overflow: hidden;
+      border-bottom: 2px solid var(--ink-dark);
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: sepia(15%) contrast(105%);
+      transition: transform 0.5s ease;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44,34,30,0.75) 0%, rgba(44,34,30,0.1) 60%);
+    }
+
+    .hero-sparkles {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      color: #fffdf9;
+      font-size: 14px;
+      letter-spacing: 6px;
+      text-shadow: 1px 1px 0 var(--ink-dark);
+    }
+
+    .hero-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--momiji-red);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1.5px solid var(--ink-dark);
+      box-shadow: 2px 2px 0 var(--ink-dark);
+    }
+
+    .hero-content {
+      padding: 16px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .hero-day-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--momiji-red);
+      letter-spacing: 1px;
+    }
+
+    .hero-content h2 {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 22px;
+      font-weight: 900;
+      margin: 4px 0 6px;
+    }
+
+    .hero-content p {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-dates {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: var(--gingko-light);
+      border: 1px solid var(--ink-dark);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* 昭和郵戳裝飾 */
+    .hero-stamp {
+      width: 72px;
+      height: 72px;
+      border: 2px dashed var(--momiji-red);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--momiji-red);
+      font-family: 'Noto Serif TC', serif;
+      transform: rotate(-12deg);
+      background: rgba(179, 57, 43, 0.06);
+      flex-shrink: 0;
+    }
+    .hero-stamp span:first-child { font-size: 10px; letter-spacing: 1px; }
+    .hero-stamp strong { font-size: 18px; line-height: 1.1; }
+    .hero-stamp span:last-child { font-size: 9px; font-family: 'JetBrains Mono', monospace; }
+
+    /* 進度與天氣儀表板 */
+    .dashboard-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 2px solid var(--ink-dark);
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: var(--shadow-retro);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--ink-muted);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink-dark);
+    }
+
+    .stat-value span {
+      font-size: 13px;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #e9e0d1;
+      border: 1.5px solid var(--ink-dark);
+      border-radius: 99px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--momiji-red), var(--gingko-gold));
+      transition: width 0.3s ease;
+    }
+
+    .weather-sub {
+      font-size: 11px;
+      color: var(--momiji-red);
+      margin-top: 6px;
+      font-weight: 700;
+    }
+
+    /* 日期選擇器 Navigation */
+    .day-tabs {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
+    }
+    .day-tabs::-webkit-scrollbar { display: none; }
+
+    .day-tab {
+      flex: 0 0 auto;
+      background: var(--bg-card);
+      border: 2px solid var(--ink-dark);
+      border-radius: 8px;
+      padding: 8px 14px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      box-shadow: 2px 2px 0 var(--ink-dark);
+    }
+
+    .day-tab .d-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      display: block;
+      color: var(--ink-muted);
+    }
+
+    .day-tab .d-loc {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-dark);
+    }
+
+    .day-tab.active {
+      background: var(--momiji-red);
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 var(--ink-dark);
+    }
+    .day-tab.active .d-num,
+    .day-tab.active .d-loc {
+      color: #fffdf9;
+    }
+
+    /* 行程卡片清單 */
+    .itinerary-list {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .stop-card {
+      background: var(--bg-card);
+      border: 2px solid var(--ink-dark);
+      border-radius: 10px;
+      padding: 14px;
+      box-shadow: var(--shadow-retro);
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .stop-card.checked {
+      background: #f3ede2;
+      border-color: var(--ink-muted);
+      box-shadow: 1px 1px 0 var(--ink-muted);
+    }
+
+    .stop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .stop-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--momiji-red);
+      background: var(--momiji-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--momiji-red);
+    }
+
+    .stop-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--gingko-light);
+      color: #966509;
+      border: 1px solid #d99b26;
+    }
+
+    .stop-title {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stop-desc {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .stop-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed var(--border-retro);
+      padding-top: 10px;
+      gap: 8px;
+    }
+
+    .stop-transport {
+      font-size: 12px;
+      color: var(--ink-dark);
+      font-weight: 500;
+    }
+
+    .stop-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-action {
+      border: 1.5px solid var(--ink-dark);
+      background: var(--bg-card);
+      color: var(--ink-dark);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 1.5px 1.5px 0 var(--ink-dark);
+    }
+
+    .btn-check.active {
+      background: var(--matcha-green);
+      color: #fff;
+    }
+
+    /* 頁尾 Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      padding: 18px 12px;
+      border-top: 2px solid var(--ink-dark);
+      text-align: center;
+      color: var(--ink-muted);
+    }
+
+    footer strong {
+      display: block;
+      font-family: 'Noto Serif TC', serif;
+      color: var(--ink-dark);
+      font-size: 14px;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    footer small {
+      display: block;
+      font-size: 11px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    /* 底部固定功能列 */
+    .bottom-nav {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 448px;
+      background: var(--ink-dark);
+      color: #fffdf9;
+      border-radius: 14px;
+      padding: 8px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      z-index: 10;
+      box-shadow: 0 6px 20px rgba(44, 34, 30, 0.35);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: #b8aba3;
+      padding: 6px 4px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-btn.active {
+      background: var(--momiji-red);
+      color: #fffdf9;
+    }
+
+    /* 彈出視窗 Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 34, 30, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 50;
+    }
+    .modal-backdrop.show { display: flex; }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 2px solid var(--ink-dark);
+      border-radius: 12px;
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      box-shadow: 5px 5px 0 var(--ink-dark);
+    }
+    .modal-box h3 {
+      font-family: 'Noto Serif TC', serif;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: var(--momiji-red);
+    }
+    .modal-box p {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 飄落楓葉與銀杏背景 -->
+  <div class="falling-leaves" aria-hidden="true">
+    <span class="leaf">🍁</span>
+    <span class="leaf">🍂</span>
+    <span class="leaf">🍁</span>
+    <span class="leaf">🍂</span>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header>
+      <div>
+        <span class="brand-sub">TOKYO MOMIJI · 5 DAYS</span>
+        <h1>東京紅葉帳</h1>
+      </div>
+      <div class="header-meta">
+        <div id="jst-clock" aria-label="日本時間">日本時間 · --:--</div>
+        <div class="status-badge">
+          <i class="status-dot" id="net-dot"></i>
+          <span id="net-text">連線正常</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- 旅行封面 -->
+      <section class="hero-card" aria-label="旅行封面">
+        <div class="hero-image-wrap">
+          <img id="hero-img" src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=80" alt="東京秋日楓紅">
+          <div class="hero-overlay"></div>
+          <div class="hero-tag">🍁 秋日東京 · 紅葉狩日誌</div>
+          <div class="hero-sparkles">✦ ◆ ✧</div>
+        </div>
+        <div class="hero-content">
+          <div>
+            <span class="hero-day-code" id="hero-code">SHINJUKU & GAIEN · DAY 01</span>
+            <h2 id="hero-title">神宮外苑・黃金銀杏並木</h2>
+            <p id="hero-desc">五天四夜，收藏東京街頭的深紅與燦金。</p>
+            <span class="hero-dates">20.NOV — 24.NOV.2026</span>
+          </div>
+          <div class="hero-stamp" aria-hidden="true">
+            <span>紅葉狩</span>
+            <strong id="stamp-day">初日</strong>
+            <span>TOKYO</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 旅途進度 & 當地天氣 -->
+      <section class="dashboard-grid">
+        <div class="stat-card">
+          <div class="stat-label">✦ 紅葉蒐集進度</div>
+          <div class="stat-value">
+            <strong id="checked-count">0</strong> <span>/ <span id="total-count">15</span> 站</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-bar"></div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">☀ 東京秋日天氣</div>
+          <div class="stat-value">
+            <strong id="weather-temp">14°C</strong> <span>🍁</span>
+          </div>
+          <div class="weather-sub" id="foliage-index">見頃指數：★ ★ ★ ★ ☆</div>
+        </div>
+      </section>
+
+      <!-- 日期選擇列 -->
+      <nav class="day-tabs" id="day-tabs" aria-label="選擇旅遊日期"></nav>
+
+      <!-- 每日行程列表 -->
+      <section class="itinerary-list" id="itinerary-list" aria-live="polite"></section>
+
+      <!-- Footer -->
+      <footer>
+        <strong>東京紅葉帳 · TOKYO MOMIJI 5 DAYS</strong>
+        <small>五日15站賞楓名所、夜間點燈時刻、交通導航及旅行SOS。打卡紀錄儲存在本機瀏覽器，離線亦可隨時查閱。</small>
+      </footer>
+    </main>
+  </div>
+
+  <!-- 底部功能列 -->
+  <nav class="bottom-nav" aria-label="主要功能">
+    <button class="nav-btn active" onclick="closeModal()">
+      <span>🍁</span>
+      <span>行程表</span>
+    </button>
+    <button class="nav-btn" onclick="openModal('lightup')">
+      <span>🏮</span>
+      <span>夜楓點燈</span>
+    </button>
+    <button class="nav-btn" onclick="openModal('pass')">
+      <span>🎫</span>
+      <span>交通票券</span>
+    </button>
+    <button class="nav-btn" onclick="openModal('sos')">
+      <span>🆘</span>
+      <span>旅行SOS</span>
+    </button>
+  </nav>
+
+  <!-- 彈出資訊視窗 -->
+  <div class="modal-backdrop" id="info-modal" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <h3 id="modal-title">標題</h3>
+      <div id="modal-body"></div>
+      <button class="btn-action" style="width:100%; justify-content:center; margin-top:8px;" onclick="closeModal()">關閉視窗</button>
+    </div>
+  </div>
+
+  <script>
+    // 東京五日賞楓行程資料庫
+    const TOKYO_DATA = [
+      {
+        day: 1,
+        stamp: "初日",
+        code: "GAIEN & ROPPONGI · DAY 01",
+        title: "神宮外苑・黃金銀杏並木",
+        desc: "漫步300公尺金黃銀杏隧道，夜晚登高俯瞰東京鐵塔秋色。",
+        weather: "15°C",
+        foliage: "銀杏見頃：★ ★ ★ ★ ★",
+        img: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=900&q=80",
+        locShort: "外苑・六本木",
+        stops: [
+          {
+            id: "d1-s1",
+            time: "09:30",
+            badge: "銀杏名所",
+            title: "明治神宮外苑 銀杏並木",
+            desc: "東京最具代表性的秋日風景，146棵銀杏樹交織成壯觀的黃金大道，建議早晨前往避開人潮。",
+            transport: "🚇 東京Metro「外苑前站」步行5分",
+            mapQuery: "明治神宮外苑いちょう並木"
+          },
+          {
+            id: "d1-s2",
+            time: "13:30",
+            badge: "皇家庭園",
+            title: "新宿御苑 紅葉林與日本庭園",
+            desc: "結合法式梧桐大道與日式池泉迴遊庭園，楓紅倒映在水面上層次極美。",
+            transport: "🚇 丸之內線「新宿御苑前站」步行5分",
+            mapQuery: "新宿御苑"
+          },
+          {
+            id: "d1-s3",
+            time: "17:30",
+            badge: "夜楓點燈",
+            title: "六本木 毛利庭園 & けやき坂",
+            desc: "欣賞都會高樓環抱的日式庭園秋楓，順遊櫸木坂通璀璨燈海與東京鐵塔同框。",
+            transport: "🚇 日比谷線「六本木站」直結",
+            mapQuery: "毛利庭園"
+          }
+        ]
+      },
+      {
+        day: 2,
+        stamp: "二日",
+        code: "BUNKYO & KOMAGOME · DAY 02",
+        title: "六義園・大名庭園夜楓",
+        desc: "走進江戶時代的回遊式築山泉水庭園，感受古典東京的深秋。",
+        weather: "14°C",
+        foliage: "紅葉見頃：★ ★ ★ ★ ★",
+        img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80",
+        locShort: "本鄉・駒込",
+        stops: [
+          {
+            id: "d2-s1",
+            time: "10:00",
+            badge: "校園銀杏",
+            title: "東京大學 本鄉校區（赤門・安田講堂）",
+            desc: "百年歐式建築與巨大銀杏樹交織，落葉鋪滿整條大道，充滿濃厚書卷氣息。",
+            transport: "🚇 南北線「東大前站」步行5分",
+            mapQuery: "東京大学本郷キャンパス"
+          },
+          {
+            id: "d2-s2",
+            time: "14:00",
+            badge: "深紅峽谷",
+            title: "小石川後樂園",
+            desc: "東京都內最古老的大名庭園，園內「通天橋」周邊上百株イロハ紅葉如火焰般盛開。",
+            transport: "🚇 大江戶線「飯田橋站」步行3分",
+            mapQuery: "小石川後楽園"
+          },
+          {
+            id: "d2-s3",
+            time: "17:00",
+            badge: "特別夜間開園",
+            title: "六義園 秋季夜間點燈",
+            desc: "超過400棵楓樹與茶屋倒映在池水中，夜間燈光投射下宛如浮世繪幻境。",
+            transport: "🚇 JR山手線「駒込站」步行7分",
+            mapQuery: "六義園"
+          }
+        ]
+      },
+      {
+        day: 3,
+        stamp: "三日",
+        code: "MT. TAKAO · DAY 03",
+        title: "高尾山・紅葉纜車紀行",
+        desc: "搭乘日本第一陡峭纜車穿越紅黃交錯的山林隧道。",
+        weather: "11°C",
+        foliage: "山岳紅葉：★ ★ ★ ★ ★",
+        img: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=900&q=80",
+        locShort: "高尾山・八王子",
+        stops: [
+          {
+            id: "d3-s1",
+            time: "09:00",
+            badge: "絕景纜車",
+            title: "高尾山 清瀧站纜車・紅葉隧道",
+            desc: "搭乘高尾山纜車或吊椅上山，沿途兩側イロハモミジ將整座山頭染成漸層紅橙色。",
+            transport: "🚆 京王線「高尾山口站」步行5分",
+            mapQuery: "高尾山清滝駅"
+          },
+          {
+            id: "d3-s2",
+            time: "11:30",
+            badge: "山岳信仰",
+            title: "高尾山藥王院 & 山頂富士展望",
+            desc: "參拜天狗信仰古剎，在紅葉簇擁下品嚐炭烤天狗燒與現做山藥蕎麥麵。",
+            transport: "🥾 一號路步道健行約40分",
+            mapQuery: "高尾山薬王院"
+          },
+          {
+            id: "d3-s3",
+            time: "16:30",
+            badge: "昭和懷舊",
+            title: "吉祥寺 口琴橫丁 & 井之頭恩賜公園",
+            desc: "傍晚返回市區，欣賞井之頭池畔水杉與楓紅，夜晚在昭和感滿載的口琴橫丁小酌。",
+            transport: "🚆 京王井之頭線「吉祥寺站」步行5分",
+            mapQuery: "井の頭恩賜公園"
+          }
+        ]
+      },
+      {
+        day: 4,
+        stamp: "四日",
+        code: "SHOWA KINEN &JIYUGAOKA · DAY 04",
+        title: "昭和紀念公園・黃金絨毯",
+        desc: "走進立川的巨型秋日森林，踏上厚厚的銀杏落葉地毯。",
+        weather: "13°C",
+        foliage: "見頃指數：★ ★ ★ ★ ★",
+        img: "https://images.unsplash.com/photo-1573455494060-c5595004fb6c?auto=format&fit=crop&w=900&q=80",
+        locShort: "立川・九段下",
+        stops: [
+          {
+            id: "d4-s1",
+            time: "09:30",
+            badge: "雙銀杏並木",
+            title: "國營昭和紀念公園（かたらいのイチョウ並木）",
+            desc: "園區內的運河銀杏與日本庭園紅葉同時見頃，租借單車穿梭在金黃落葉雨中。",
+            transport: "🚆 JR中央線「西立川站」步行2分",
+            mapQuery: "国営昭和記念公園"
+          },
+          {
+            id: "d4-s2",
+            time: "15:00",
+            badge: "世田谷秘境",
+            title: "九品佛 淨真寺",
+            desc: "隱藏在自由之丘附近的靜謐古剎，參道上的大銀杏與紫葉楓交織，遊客稀少而清幽。",
+            transport: "🚆 東急大井町線「九品佛站」步行4分",
+            mapQuery: "九品仏浄真寺"
+          },
+          {
+            id: "d4-s3",
+            time: "18:00",
+            badge: "皇居秋色",
+            title: "北之丸公園・千鳥淵秋日散步",
+            desc: "在皇居外圍欣賞紅黃交織的紅葉山，順道前往神保町古書街尋寶與享用歐風咖哩。",
+            transport: "🚇 半藏門線「九段下站」步行5分",
+            mapQuery: "北の丸公園もみじ山"
+          }
+        ]
+      },
+      {
+        day: 5,
+        stamp: "終日",
+        code: "ASAKUSA & UENO · DAY 05",
+        title: "下町淺草・隅田川秋日終章",
+        desc: "在百年庭園與下町老街中，寄出旅途最後一張紅葉明信片。",
+        weather: "15°C",
+        foliage: "見頃指數：★ ★ ★ ★ ☆",
+        img: "https://images.unsplash.com/photo-1509023464722-18d996393ca8?auto=format&fit=crop&w=900&q=80",
+        locShort: "清澄・上野",
+        stops: [
+          {
+            id: "d5-s1",
+            time: "09:30",
+            badge: "名石與紅葉",
+            title: "清澄庭園 & 清澄白河咖啡巡禮",
+            desc: "明治時代的泉水庭園，踏著池邊的「磯渡り」石步賞楓，隨後在藍瓶咖啡創始店享受晨間時光。",
+            transport: "🚇 大江戶線「清澄白河站」步行3分",
+            mapQuery: "清澄庭園"
+          },
+          {
+            id: "d5-s2",
+            time: "12:30",
+            badge: "下町風情",
+            title: "淺草寺 五重塔銀杏 & 傳法院通",
+            desc: "朱紅色的雷門、五重塔與金黃銀杏相映成趣，品嚐人形燒與老字號天婦羅。",
+            transport: "🚇 銀座線「淺草站」步行5分",
+            mapQuery: "浅草寺"
+          },
+          {
+            id: "d5-s3",
+            time: "15:00",
+            badge: "完美賦歸",
+            title: "上野恩賜公園 → 京成Skyliner往成田機場",
+            desc: "最後巡禮上野公園噴水池前的銀杏大道與清水觀音堂秋色，滿載伴手禮前往機場。",
+            transport: "🚆 京成電鐵「京成上野站」直達成田機場",
+            mapQuery: "上野恩賜公園"
+          }
+        ]
+      }
+    ];
+
+    const STORAGE_KEY = "tokyo_momiji_2026_checked";
+    let currentDay = 1;
+    let checkedStops = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+    // 初始化應用程式
+    function initApp() {
+      renderDayTabs();
+      selectDay(1);
+      updateProgress();
+      updateClock();
+      setInterval(updateClock, 10000);
+      window.addEventListener('online', updateNetworkStatus);
+      window.addEventListener('offline', updateNetworkStatus);
+      updateNetworkStatus();
+    }
+
+    // 更新日本時間 (UTC+9)
+    function updateClock() {
+      const now = new Date();
+      const jstTime = new Intl.DateTimeFormat('zh-TW', {
+        timeZone: 'Asia/Tokyo',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }).format(now);
+      document.getElementById('jst-clock').textContent = `日本時間 · ${jstTime}`;
+    }
+
+    // 更新連線狀態
+    function updateNetworkStatus() {
+      const dot = document.getElementById('net-dot');
+      const text = document.getElementById('net-text');
+      if (navigator.onLine) {
+        dot.style.backgroundColor = "var(--matcha-green)";
+        text.textContent = "連線正常";
+      } else {
+        dot.style.backgroundColor = "var(--gingko-gold)";
+        text.textContent = "離線模式";
+      }
+    }
+
+    // 渲染日期切換按鈕
+    function renderDayTabs() {
+      const container = document.getElementById('day-tabs');
+      container.innerHTML = TOKYO_DATA.map(d => `
+        <button class="day-tab ${d.day === currentDay ? 'active' : ''}" onclick="selectDay(${d.day})">
+          <span class="d-num">DAY 0${d.day}</span>
+          <span class="d-loc">${d.locShort}</span>
+        </button>
+      `).join('');
+    }
+
+    // 切換天數
+    function selectDay(dayNum) {
+      currentDay = dayNum;
+      const dayData = TOKYO_DATA.find(d => d.day === dayNum);
+      renderDayTabs();
+
+      // 更新封面資訊
+      document.getElementById('hero-img').src = dayData.img;
+      document.getElementById('hero-code').textContent = dayData.code;
+      document.getElementById('hero-title').textContent = dayData.title;
+      document.getElementById('hero-desc').textContent = dayData.desc;
+      document.getElementById('stamp-day').textContent = dayData.stamp;
+      document.getElementById('weather-temp').textContent = dayData.weather;
+      document.getElementById('foliage-index').textContent = dayData.foliage;
+
+      // 渲染行程卡片
+      const list = document.getElementById('itinerary-list');
+      list.innerHTML = dayData.stops.map(stop => {
+        const isChecked = checkedStops.includes(stop.id);
+        return `
+          <article class="stop-card ${isChecked ? 'checked' : ''}">
+            <div class="stop-header">
+              <span class="stop-time">${stop.time}</span>
+              <span class="stop-badge">${stop.badge}</span>
+            </div>
+            <h3 class="stop-title">${stop.title}</h3>
+            <p class="stop-desc">${stop.desc}</p>
+            <div class="stop-footer">
+              <span class="stop-transport">${stop.transport}</span>
+              <div class="stop-actions">
+                <a class="btn-action" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.mapQuery)}" target="_blank" rel="noopener">
+                  📍 導航
+                </a>
+                <button class="btn-action btn-check ${isChecked ? 'active' : ''}" onclick="toggleCheck('${stop.id}')">
+                  ${isChecked ? '✓ 已蒐集' : '🍁 打卡'}
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // 切換打卡狀態並寫入 localStorage
+    function toggleCheck(stopId) {
+      if (checkedStops.includes(stopId)) {
+        checkedStops = checkedStops.filter(id => id !== stopId);
+      } else {
+        checkedStops.push(stopId);
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedStops));
+      selectDay(currentDay);
+      updateProgress();
+    }
+
+    // 更新頂部進度條
+    function updateProgress() {
+      const total = TOKYO_DATA.reduce((sum, d) => sum + d.stops.length, 0);
+      const count = checkedStops.length;
+      const pct = Math.round((count / total) * 100);
+      document.getElementById('checked-count').textContent = count;
+      document.getElementById('total-count').textContent = total;
+      document.getElementById('progress-bar').style.width = `${pct}%`;
+    }
+
+    // 底部選單彈窗內容
+    function openModal(type) {
+      const modal = document.getElementById('info-modal');
+      const title = document.getElementById('modal-title');
+      const body = document.getElementById('modal-body');
+
+      if (type === 'lightup') {
+        title.textContent = "🏮 東京夜楓點燈時刻備忘";
+        body.innerHTML = `
+          <p><strong>・六義園 庭紅葉の六義園夜間特別観賞</strong><br>17:00 – 20:30（需事先於線上購買指定日期預約券）</p>
+          <p><strong>・國營昭和紀念公園 秋の夜散歩</strong><br>16:30 – 20:30（日本庭園及銀杏大道同步點燈）</p>
+          <p><strong>・明治神宮外苑 銀杏並木</strong><br>日落後街燈自然映照，建議於 16:00 夕陽斜射時拍攝金色光影。</p>
+        `;
+      } else if (type === 'pass') {
+        title.textContent = "🎫 推薦東京交通票券";
+        body.innerHTML = `
+          <p><strong>・Tokyo Subway Ticket (24/48/72小時)</strong><br>無限次搭乘東京Metro與都營地下鐵全線（涵蓋外苑前、六本木、飯田橋、清澄白河）。</p>
+          <p><strong>・京王電鐵 高尾山折扣套票</strong><br>包含新宿～高尾山口來回車票 + 高尾山纜車/吊椅來回券8折優惠。</p>
+        `;
+      } else if (type === 'sos') {
+        title.textContent = "🆘 日本緊急聯絡與旅行 SOS";
+        body.innerHTML = `
+          <p><strong>・日本報警：</strong>110 ／ <strong>火警救護車：</strong>119</p>
+          <p><strong>・駐日台北經濟文化代表處（東京）：</strong><br>電話：+81-3-3280-7811<br>緊急聯絡電話：+81-80-1009-7179</p>
+          <p><strong>・JNTO 日本政府觀光局 24小時中文專線：</strong><br>050-3816-2720</p>
+        `;
+      }
+      modal.classList.add('show');
+    }
+
+    function closeModal() {
+      document.getElementById('info-modal').classList.remove('show');
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
